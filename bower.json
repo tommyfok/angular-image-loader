@@ -5,7 +5,7 @@
     "tommyfok <154274174@qq.com>"
   ],
   "description": "Image Loader Plugin for AngularJS",
-  "main": "tommy.image-loader.js",
+  "main": "angular-image-loader.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
