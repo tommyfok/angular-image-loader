@@ -1,0 +1,17 @@
+{
+  "name": "angular-image-loader",
+  "version": "0.0.1",
+  "authors": [
+    "tommyfok <154274174@qq.com>"
+  ],
+  "description": "Image Loader Plugin for AngularJS",
+  "main": "tommy.image-loader.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
