@@ -16,5 +16,5 @@
     '/images/img3.jpg'
   ], function () {
     // do something
-  });
+  }, callbackContext);
 ```
