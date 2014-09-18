@@ -1,8 +1,53 @@
 "use strict";
 
 angular.module('tomNgImgLoader', [])
-.factory(function () {
-  return function (imgList, callback) {
-    console.log(ok);
-  };
+.factory('tomNgImgLoader', function ($timeout) {
+  var loadedImages = [],
+      loadingImages = [];
+
+  function isLoaded (imagesToLoad) {
+    for (var i = 0; i < imagesToLoad.length; i++) {
+      if (loadedImages.indexOf(imagesToLoad[i]) < 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function imgLoader(imgList, callback, context) {
+    var context = context || window;
+    for (var i = 0; i < imgList.length; i++) {
+      (function (ii) {
+        if (loadedImages.indexOf(imgList[ii]) < 0) {
+          if (loadingImages.indexOf(imgList[ii]) < 0) {
+            var img;
+
+            try {
+              img = new Image();
+            } catch (e) {
+              img = document.createElement('img');
+              throw 'Warning: You are using an out-dated browser.';
+            }
+
+            img['oncomplete' in img ? 'oncomplete' : 'onload'] = function () {
+              loadedImages.push(imgList[ii]);
+            };
+
+            img.src = imgList[ii];
+            loadingImages.push(imgList[ii]);
+          }
+        }
+      })(i);
+    }
+
+    if (isLoaded(imgList)) {
+      callback.call(context);
+    } else {
+      $timeout(function () {
+        imgLoader(imgList, callback, context);
+      }, 200);
+    }
+  }
+
+  return imgLoader;
 });
