@@ -2,6 +2,7 @@
 
 angular.module('tomNgImgLoader', [])
 .factory('tomNgImgLoader', function ($timeout) {
+  var self = this;
   var loadedImages = [],
       loadingImages = [];
 
@@ -15,7 +16,7 @@ angular.module('tomNgImgLoader', [])
   }
 
   function imgLoader(imgList, callback, context) {
-    var context = context || window;
+    var context = context || self;
     for (var i = 0; i < imgList.length; i++) {
       (function (ii) {
         if (loadedImages.indexOf(imgList[ii]) < 0) {
