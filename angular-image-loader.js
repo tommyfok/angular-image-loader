@@ -17,6 +17,7 @@ angular.module('tomNgImgLoader', [])
 
   function imgLoader(imgList, callback, context) {
     var context = context || self;
+
     for (var i = 0; i < imgList.length; i++) {
       (function (ii) {
         if (loadedImages.indexOf(imgList[ii]) < 0) {
@@ -32,6 +33,9 @@ angular.module('tomNgImgLoader', [])
 
             img['oncomplete' in img ? 'oncomplete' : 'onload'] = function () {
               loadedImages.push(imgList[ii]);
+              if (isLoaded(imgList)) {
+                callback.call(context);
+              }
             };
 
             img.src = imgList[ii];
@@ -43,10 +47,6 @@ angular.module('tomNgImgLoader', [])
 
     if (isLoaded(imgList)) {
       callback.call(context);
-    } else {
-      $timeout(function () {
-        imgLoader(imgList, callback, context);
-      }, 200);
     }
   }
 
