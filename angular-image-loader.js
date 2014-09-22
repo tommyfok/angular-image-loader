@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module('tomNgImgLoader', [])
-.factory('tomNgImgLoader', function ($timeout) {
+.factory('tomNgImgLoader', function () {
   var self = this;
   var loadedImages = [],
       loadingImages = [];
