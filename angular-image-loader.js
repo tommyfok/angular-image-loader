@@ -38,8 +38,8 @@ angular.module('tomNgImgLoader', [])
               }
             };
 
-            img.src = imgList[ii];
             loadingImages.push(imgList[ii]);
+            img.src = imgList[ii];
           }
         }
       })(i);
