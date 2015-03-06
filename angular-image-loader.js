@@ -31,12 +31,23 @@ angular.module('tomNgImgLoader', [])
               throw 'Warning: You are using an out-dated browser.';
             }
 
-            img['oncomplete' in img ? 'oncomplete' : 'onload'] = function () {
-              loadedImages.push(imgList[ii]);
-              if (isLoaded(imgList)) {
-                callback.call(context);
-              }
-            };
+            if ('onreadystatechange' in img) {
+              img.onreadystatechange = function () {
+                if (img.readyState === "complete" || img.readyState === "loaded") {
+                  loadedImages.push(imgList[ii]);
+                  if (isLoaded(imgList)) {
+                    callback.call(context);
+                  }
+                }
+              };
+            } else {
+              img.onload = function () {
+                loadedImages.push(imgList[ii]);
+                if (isLoaded(imgList)) {
+                  callback.call(context);
+                }
+              };
+            }
 
             loadingImages.push(imgList[ii]);
             img.src = imgList[ii];
